@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Fun Facts</title>
+    <style>
+        /* Basic styling for the body to center content and set background color */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Styling for the main container */
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the title */
+        .title {
+            margin-bottom: 20px;
+        }
+
+        /* Base styling for buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        /* Styling for the primary button */
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Hover effect for the primary button */
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Styling for the share button */
+        .btn-share {
+            background-color: #1da1f2;
+            color: white;
+        }
+
+        /* Hover effect for the share button */
+        .btn-share:hover {
+            background-color: #0d8ddb;
+            transform: scale(1.05);
+        }
+
+        /* Styling for the fact display area */
+        .fact-display {
+            margin: 20px 0;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Class to show the fact with fade-in effect */
+        .fact-display.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Random Fun Facts</h1>
+        <!-- Button to show a random fun fact -->
+        <button id="factButton" class="btn btn-primary">Show Random Fact</button>
+        <!-- Area to display the random fun fact -->
+        <div id="factDisplay" class="fact-display"></div>
+        <!-- Button to share the displayed fact on Twitter -->
+        <button id="shareButton" class="btn btn-share">Share on Twitter</button>
+    </div>
+    <script>
+        // Sample array of fun facts
+        const funFacts = [
+            "Honey never spoils.",
+            "Bananas are berries, but strawberries aren't.",
+            "A group of flamingos is called a 'flamboyance'.",
+            "Octopuses have three hearts.",
+            "Wombat poop is cube-shaped."
+        ];
+
+        // Function to display a random fact
+        function displayRandomFact() {
+            // Generate a random index to select a fact
+            const randomIndex = Math.floor(Math.random() * funFacts.length);
+            const factDisplay = document.getElementById('factDisplay');
+            // Set the selected fact as the text content
+            factDisplay.textContent = funFacts[randomIndex];
+            factDisplay.classList.remove('show'); // Remove the class to reset opacity
+            setTimeout(() => {
+                factDisplay.classList.add('show'); // Add class to fade in
+            }, 10);
+        }
+
+        // Function to share the fact on Twitter
+        function shareOnTwitter() {
+            // Get the currently displayed fact
+            const factDisplay = document.getElementById('factDisplay').textContent;
+            // Construct the Twitter share URL with the fact
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(factDisplay)}`;
+            // Open the Twitter share URL in a new tab
+            window.open(twitterUrl, '_blank');
+        }
+
+        // Event listeners for buttons
+        document.getElementById('factButton').addEventListener('click', displayRandomFact);
+        document.getElementById('shareButton').addEventListener('click', shareOnTwitter);
+    </script>
+</body>
+</html>
